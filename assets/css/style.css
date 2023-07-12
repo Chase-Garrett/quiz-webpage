@@ -30,7 +30,31 @@ header {
   padding-top: 0px;
   color: hsl(206, 17%, 28%);
 }
-  
+
+/* set view highscores to the upper left of the page */
+.header-left {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 10px;
+  color: hsl(206, 17%, 28%);
+}
+
+/* set timer to the upper right of the page */
+.header-right {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 10px;
+  color: hsl(206, 17%, 28%);
+}
+
+/* make timer hidden until quize starts */
+#time {
+  display: none;
+}
+
+/* set formatting for quiz section */
 .quiz {
   background-color: hsl(0, 0%, 100%);
   font-size: 18px;
@@ -44,7 +68,8 @@ header {
 .quiz-footer {
   text-align: center;
 }
-  
+
+/* set formatting for btn */
 .btn {
   border: none;
   background-color: purple;
