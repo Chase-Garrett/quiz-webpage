@@ -58,6 +58,7 @@ header {
   
 .quiz-body {
   min-height: 100px;
+  display: block;
 }
   
 .quiz-footer {

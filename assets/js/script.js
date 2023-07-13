@@ -6,6 +6,98 @@ var secondsLeft = 75;
 var currentQuestion = 1;
 var score = 0;
 
+// saveScore function
+function saveScore() {
+    // gets initials from input element
+    var initials = document.querySelector("#initials").value;
+    // creates object to store initials and score
+    var scoreObject = {
+        initials: initials,
+        score: score
+    };
+    // gets scores from local storage
+    var scores = JSON.parse(localStorage.getItem("scores"));
+    // checks if scores is null
+    if (scores == null) {
+        // creates array to store scores
+        scores = [];
+    }
+    // adds scoreObject to scores array
+    scores.push(scoreObject);
+    // saves scores array to local storage
+    localStorage.setItem("scores", JSON.stringify(scores));
+}
+
+// addScore function
+function addScore() {
+    // hides buttons
+    var button1 = document.querySelector("#btn1");
+    button1.style.display = "none";
+    var button2 = document.querySelector("#btn2");
+    button2.style.display = "none";
+    var button3 = document.querySelector("#btn3");
+    button3.style.display = "none";
+    var button4 = document.querySelector("#btn4");
+    button4.style.display = "none";
+
+
+    // removes text from quiz-body div
+    var quizBody = document.querySelector(".quiz-body");
+    quizBody.textContent = "";
+    // removes text from answer div
+    var answer = document.querySelector("#answer");
+    answer.textContent = "";
+    // removes text from quiz-header div
+    var quizHeader = document.querySelector(".quiz-header");
+    quizHeader.textContent = "";
+    // removes text from timer div
+    var timer = document.querySelector("#time");
+    timer.textContent = "";
+    // creates form element
+    var form = document.createElement("form");
+    // creates label element
+    var label = document.createElement("label");
+    // creates input element
+    var input = document.createElement("input");
+    // creates button element
+    var button = document.createElement("button");
+    button.setAttribute("class", "btn");
+    // adds text to label element
+    label.textContent = "Score = " + score + " Enter initials: ";
+    // adds attributes to input element
+    input.setAttribute("type", "text");
+    input.setAttribute("id", "initials");
+    // adds text to button element
+    button.textContent = "Submit";
+    // adds event listener to button element
+    button.addEventListener("click", function (event) {
+        event.preventDefault();
+        // calls function to save initials and score to local storage
+        saveScore();
+    });
+    // create button to clear score and restart quiz
+    var clearButton = document.createElement("button");
+    clearButton.setAttribute("class", "btn");
+    clearButton.textContent = "Replay";
+    clearButton.addEventListener("click", function (event) {
+        event.preventDefault();
+        // clears score
+        score = 0;
+        // return to start of quiz
+        startQuiz();
+    });
+    // appends label element to form element
+    form.appendChild(label);
+    // appends input element to form element
+    form.appendChild(input);
+    // appends button element to form element
+    form.appendChild(button);
+    // appends form element to quiz-body div
+    quizBody.appendChild(form);
+    // appends clearButton to quiz-footer div
+    var quizFooter = document.querySelector(".quiz-footer");
+    quizFooter.appendChild(clearButton);
+}
 
 // Timer function
 function setTime() {
@@ -21,6 +113,72 @@ function setTime() {
             addScore();
         }
     }, 1000);
+}
+
+// wrongAnswer function
+function wrongAnswer() {
+    // print "Wrong!" below the buttons
+    var wrong = document.querySelector("#answer");
+    wrong.textContent = "Wrong!";
+    // subtract 10 seconds from timer
+    secondsLeft -= 10;
+    // move to next question
+    currentQuestion++;
+    switch (currentQuestion) {
+        case 2:
+            // calls second question function
+            secondQuestion();
+            break;
+        case 3:
+            // calls third question function
+            thirdQuestion();
+            break;
+        case 4:
+            // calls fourth question function
+            fourthQuestion();
+            break;
+        case 5:
+            // calls fifth question function
+            fifthQuestion();
+            break;
+        case 6:
+            // calls function to add initials and score to local storage
+            addScore();
+            break;
+    }
+}
+
+// correctAnswer function
+function correctAnswer() {
+    // print "Correct!" below the buttons
+    var correct = document.querySelector("#answer");
+    correct.textContent = "Correct!";
+    // add 10 points to score
+    score += 10;
+    // move to next question
+    currentQuestion++;
+    switch (currentQuestion) {
+        case 2:
+            // calls second question function
+            secondQuestion();
+            break;
+        case 3:
+            // calls third question function
+            thirdQuestion();
+            break;
+        case 4:
+            // calls fourth question function
+            fourthQuestion();
+            break;
+        case 5:
+            // calls fifth question function
+            fifthQuestion();
+            break;
+        case 6:
+            // calls function to add initials and score to local storage
+            addScore();
+            break;
+    }
 }
 
 // secondQuestion function
@@ -109,72 +267,6 @@ function fifthQuestion() {
     button2.addEventListener("click", wrongAnswer);
     button3.addEventListener("click", wrongAnswer);
     button4.addEventListener("click", correctAnswer);
-}
-
-// wrongAnswer function
-function wrongAnswer() {
-    // print "Wrong!" below the buttons
-    var wrong = document.querySelector("#answer");
-    wrong.textContent = "Wrong!";
-    // subtract 10 seconds from timer
-    secondsLeft -= 10;
-    // move to next question
-    currentQuestion++;
-    switch (currentQuestion) {
-        case 2:
-            // calls second question function
-            secondQuestion();
-            break;
-        case 3:
-            // calls third question function
-            thirdQuestion();
-            break;
-        case 4:
-            // calls fourth question function
-            fourthQuestion();
-            break;
-        case 5:
-            // calls fifth question function
-            fifthQuestion();
-            break;
-        case 6:
-            // calls function to add initials and score to local storage
-            addScore();
-            break;
-    }
-}
-
-// correctAnswer function
-function correctAnswer() {
-    // print "Correct!" below the buttons
-    var correct = document.querySelector("#answer");
-    correct.textContent = "Correct!";
-    // add 10 points to score
-    score += 10;
-    // move to next question
-    currentQuestion++;
-    switch (currentQuestion) {
-        case 2:
-            // calls second question function
-            secondQuestion();
-            break;
-        case 3:
-            // calls third question function
-            thirdQuestion();
-            break;
-        case 4:
-            // calls fourth question function
-            fourthQuestion();
-            break;
-        case 5:
-            // calls fifth question function
-            fifthQuestion();
-            break;
-        case 6:
-            // calls function to add initials and score to local storage
-            addScore();
-            break;
-    }
 }
 
 // startQuiz function
