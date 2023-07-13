@@ -6,6 +6,75 @@ var secondsLeft = 75;
 var currentQuestion = 1;
 var score = 0;
 
+// displays high scores
+function displayScores() {
+    // hides buttons
+    var button1 = document.querySelector("#btn1");
+    button1.style.display = "none";
+    var button2 = document.querySelector("#btn2");
+    button2.style.display = "none";
+    var button3 = document.querySelector("#btn3");
+    button3.style.display = "none";
+    var button4 = document.querySelector("#btn4");
+    button4.style.display = "none";
+
+    // removes text from quiz-body div
+    var quizBody = document.querySelector(".quiz-body");
+    quizBody.textContent = "";
+    // removes text from answer div
+    var answer = document.querySelector("#answer");
+    answer.textContent = "";
+    // removes text from quiz-header div
+    var quizHeader = document.querySelector(".quiz-header");
+    quizHeader.textContent = "";
+    // removes text from timer div
+    var timer = document.querySelector("#time");
+    timer.textContent = "";
+
+    // creates h1 element
+    var h1 = document.createElement("h1");
+    // adds text to h1 element
+    h1.textContent = "High Scores";
+    // appends h1 element to quiz-body div
+    quizBody.appendChild(h1);
+    // gets scores from local storage
+    var scores = JSON.parse(localStorage.getItem("scores"));
+    // checks if scores is null
+    if (scores == null) {
+        // creates array to store scores
+        scores = [];
+    }
+    // creates ul element
+    var ul = document.createElement("ul");
+    // appends ul element to quiz-body div
+    quizBody.appendChild(ul);
+    // loops through scores array
+    for (var i = 0; i < scores.length; i++) {
+        // creates li element
+        var li = document.createElement("li");
+        // adds text to li element
+        li.textContent = scores[i].initials + " - " + scores[i].score;
+        // appends li element to ul element
+        ul.appendChild(li);
+    }
+
+    // creates button element
+    var button = document.createElement("button");
+    button.setAttribute("class", "btn");
+    // adds text to button element
+    button.textContent = "Clear Scores";
+    // adds event listener to button element
+    button.addEventListener("click", function (event) {
+        event.preventDefault();
+        // clears scores from local storage
+        localStorage.clear();
+        // calls function to display high scores
+        displayScores();
+    });
+    // appends button element to quiz-body div
+    quizBody.appendChild(button);
+}
+
 // saveScore function
 function saveScore() {
     // gets initials from input element
@@ -26,7 +95,56 @@ function saveScore() {
     scores.push(scoreObject);
     // saves scores array to local storage
     localStorage.setItem("scores", JSON.stringify(scores));
+    // calls function to display high scores
+    displayScores();
 }
+
+// firstQuestion function
+function firstQuestion() {
+    // removes text from quiz-body div
+    var quizBody = document.querySelector(".quiz-body");
+    quizBody.textContent = "";
+    // removes text from answer div
+    var answer = document.querySelector("#answer");
+    answer.textContent = "";
+    // removes text from quiz-header div
+    var quizHeader = document.querySelector(".quiz-header");
+    quizHeader.textContent = "";
+    // removes text from timer div
+    var timer = document.querySelector("#time");
+    timer.textContent = "";
+
+    // creates h1 element
+    var h1 = document.createElement("h1");
+    // adds text to h1 element
+    h1.textContent = "Coding Quiz Challenge";
+    // appends h1 element to quiz-body div
+    quizBody.appendChild(h1);
+    // creates p element
+    var p = document.createElement("p");
+    // adds text to p element
+    p.textContent = "Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by ten seconds!";
+    // appends p element to quiz-body div
+    quizBody.appendChild(p);
+    // creates button element
+    var button = document.createElement("button");
+    button.setAttribute("class", "btn");
+    // adds text to button element
+    button.textContent = "Start Quiz";
+    // adds event listener to button element
+    button.addEventListener("click", function (event) {
+        event.preventDefault();
+        // calls function to start quiz
+        startQuiz();
+    });
+    // appends button element to quiz-body div
+    quizBody.appendChild(button);
+
+    // removes replay button
+    var replay = document.querySelector("#clear");
+    replay.style.display = "none";
+}
+
 
 // addScore function
 function addScore() {
@@ -75,16 +193,18 @@ function addScore() {
         // calls function to save initials and score to local storage
         saveScore();
     });
+
     // create button to clear score and restart quiz
     var clearButton = document.createElement("button");
     clearButton.setAttribute("class", "btn");
+    clearButton.setAttribute("id", "clear");
     clearButton.textContent = "Replay";
     clearButton.addEventListener("click", function (event) {
         event.preventDefault();
         // clears score
         score = 0;
         // return to start of quiz
-        startQuiz();
+        firstQuestion();
     });
     // appends label element to form element
     form.appendChild(label);
@@ -112,6 +232,11 @@ function setTime() {
             // calls function to add initials and score to local storage
             addScore();
         }
+
+        // stops timer if all questions have been answered
+        if (currentQuestion == 6) {
+            clearInterval(timerInterval);
+        }
     }, 1000);
 }
 
@@ -122,8 +247,6 @@ function wrongAnswer() {
     wrong.textContent = "Wrong!";
     // subtract 10 seconds from timer
     secondsLeft -= 10;
-    // move to next question
-    currentQuestion++;
     switch (currentQuestion) {
         case 2:
             // calls second question function
@@ -155,8 +278,6 @@ function correctAnswer() {
     correct.textContent = "Correct!";
     // add 10 points to score
     score += 10;
-    // move to next question
-    currentQuestion++;
     switch (currentQuestion) {
         case 2:
             // calls second question function
@@ -271,6 +392,8 @@ function fifthQuestion() {
 
 // startQuiz function
 function startQuiz() {
+    // ensures timer is set to 75 seconds
+    secondsLeft = 75;
     // displays timer
     setTime();
     // removes text from quiz-body div
