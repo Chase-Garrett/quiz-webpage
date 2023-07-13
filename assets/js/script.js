@@ -13,7 +13,7 @@ function setTime() {
         secondsLeft--;
         timer.textContent = "Time: " + secondsLeft;
 
-        if (secondsLeft === 0) {
+        if (secondsLeft == 0) {
             clearInterval(timerInterval);
             timer.textContent = "Time: 0";
         }
@@ -29,6 +29,28 @@ function wrongAnswer() {
     secondsLeft -= 10;
     // move to next question
     currentQuestion++;
+    switch (currentQuestion) {
+        case 2:
+            // calls second question function
+            secondQuestion();
+            break;
+        case 3:
+            // calls third question function
+            thirdQuestion();
+            break;
+        case 4:
+            // calls fourth question function
+            fourthQuestion();
+            break;
+        case 5:
+            // calls fifth question function
+            fifthQuestion();
+            break;
+        case 6:
+            // calls function to add initials and score to local storage
+            addScore();
+            break;
+    }
 }
 
 // correctAnswer function
@@ -40,6 +62,28 @@ function correctAnswer() {
     score += 10;
     // move to next question
     currentQuestion++;
+    switch (currentQuestion) {
+        case 2:
+            // calls second question function
+            secondQuestion();
+            break;
+        case 3:
+            // calls third question function
+            thirdQuestion();
+            break;
+        case 4:
+            // calls fourth question function
+            fourthQuestion();
+            break;
+        case 5:
+            // calls fifth question function
+            fifthQuestion();
+            break;
+        case 6:
+            // calls function to add initials and score to local storage
+            addScore();
+            break;
+    }
 }
 
 // startQuiz function
