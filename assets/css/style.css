@@ -40,6 +40,20 @@ header {
   color: hsl(206, 17%, 28%);
 }
 
+/* set formatting for ul list */
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: hsl(0, 0%, 100%);
+}
+
+/* set formatting for li list */
+li {
+  float: center;
+}
+
 /* change cursor to pointer when hovering header-left and change text color to purple */
 .header-left:hover {
   cursor: pointer;
@@ -53,6 +67,13 @@ header {
   right: 0;
   padding: 10px;
   color: hsl(206, 17%, 28%);
+}
+
+/* set formatting for timer */
+.timer {
+  font-size: 18px;
+  font-weight: bold;
+  color: purple;
 }
 
 /* set formatting for quiz section */
