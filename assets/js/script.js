@@ -18,7 +18,7 @@ function addScore() {
     var button4 = document.querySelector("#btn4");
     button4.style.display = "none";
 
-    
+
     // removes text from quiz-body div
     var quizBody = document.querySelector(".quiz-body");
     quizBody.textContent = "";
@@ -43,7 +43,7 @@ function addScore() {
     // creates button element
     var button = document.createElement("button");
     // adds text to label element
-    label.textContent = "Enter initials: ";
+    label.textContent = "Score = " + score + " Enter initials: ";
     // adds attributes to input element
     input.setAttribute("type", "text");
     input.setAttribute("id", "initials");
