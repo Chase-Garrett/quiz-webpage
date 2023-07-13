@@ -2,6 +2,33 @@
 var generateBtn = document.querySelector("#start");
 var timer = document.querySelector("#time");
 
+// create button to clear score and restart quiz
+var clearButton = document.createElement("button");
+clearButton.setAttribute("class", "btn");
+clearButton.setAttribute("id", "clear");
+clearButton.textContent = "Replay";
+clearButton.addEventListener("click", function (event) {
+    event.preventDefault();
+    // clears score
+    score = 0;
+    // return to start of quiz
+    firstQuestion();
+});
+
+var quizBody = document.querySelector(".quiz-body");
+ // creates h1 element
+ var h1 = document.createElement("h1");
+ // adds text to h1 element
+ h1.textContent = "Coding Quiz Challenge";
+ // appends h1 element to quiz-body div
+ quizBody.appendChild(h1);
+ // creates p element
+ var p = document.createElement("p");
+ // adds text to p element
+ p.textContent = "Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by ten seconds!";
+ // appends p element to quiz-body div
+ quizBody.appendChild(p);
+
 var secondsLeft = 75;
 var currentQuestion = 1;
 var score = 0;
@@ -73,6 +100,8 @@ function displayScores() {
     });
     // appends button element to quiz-body div
     quizBody.appendChild(button);
+    // appends clearButton element to quiz-body div
+    quizBody.appendChild(clearButton);
 }
 
 // saveScore function
@@ -102,8 +131,8 @@ function saveScore() {
 // firstQuestion function
 function firstQuestion() {
     // removes replay button
-    var replay = document.querySelector("#clear");
-    replay.style.display = "none";
+    var clearButton = document.querySelector("#clear");
+    clearButton.remove();
 
     // sets currentQuestion to 1
     currentQuestion = 1;
@@ -197,18 +226,6 @@ function addScore() {
         saveScore();
     });
 
-    // create button to clear score and restart quiz
-    var clearButton = document.createElement("button");
-    clearButton.setAttribute("class", "btn");
-    clearButton.setAttribute("id", "clear");
-    clearButton.textContent = "Replay";
-    clearButton.addEventListener("click", function (event) {
-        event.preventDefault();
-        // clears score
-        score = 0;
-        // return to start of quiz
-        firstQuestion();
-    });
     // appends label element to form element
     form.appendChild(label);
     // appends input element to form element
@@ -417,18 +434,20 @@ function startQuiz() {
     secondsLeft = 75;
     // displays timer
     setTime();
-    // removes text from quiz-body div
-    var quizBody = document.querySelector(".quiz-body");
-    quizBody.textContent = "";
 
     // changes text of quiz-header div to first question
     var quizHeader = document.querySelector(".quiz-header");
     quizHeader.textContent = "Commonly used data types DO NOT include:";
 
-    // removes start button
-    var quizFooter = document.querySelector(".quiz-footer");
-    quizFooter.removeChild(generateBtn);
-    // add text to hidden buttons and display them
+    // removes text of quiz-body div
+    var quizBody = document.querySelector(".quiz-body");
+    quizBody.textContent = "";
+   
+    // changes text of quiz-header div to first question
+    var quizHeader = document.querySelector(".quiz-header");
+    quizHeader.textContent = "Commonly used data types DO NOT include:";
+
+    // changes text of buttons
     var button1 = document.querySelector("#btn1");
     button1.textContent = "1. strings";
     button1.style.display = "inline-block";
@@ -446,9 +465,15 @@ function startQuiz() {
     button2.addEventListener("click", wrongAnswer);
     button3.addEventListener("click", correctAnswer);
     button4.addEventListener("click", wrongAnswer);
-}
 
+    // hides start button
+    generateBtn.style.display = "none";
+}
 
 
 // When start button is clicked, quiz begins
 generateBtn.addEventListener("click", startQuiz);
+
+// make header-left clickable to view high scores
+var headerLeft = document.querySelector(".header-left");
+headerLeft.addEventListener("click", displayScores);

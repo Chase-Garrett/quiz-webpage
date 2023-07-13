@@ -40,6 +40,12 @@ header {
   color: hsl(206, 17%, 28%);
 }
 
+/* change cursor to pointer when hovering header-left and change text color to purple */
+.header-left:hover {
+  cursor: pointer;
+  color: purple;
+}
+
 /* set timer to the upper right of the page */
 .header-right {
   position: absolute;
