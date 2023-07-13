@@ -31,9 +31,6 @@ function addScore() {
     // removes text from timer div
     var timer = document.querySelector("#time");
     timer.textContent = "";
-    // removes text from start button
-    var start = document.querySelector("#start");
-    start.textContent = "";
     // creates form element
     var form = document.createElement("form");
     // creates label element
@@ -42,6 +39,7 @@ function addScore() {
     var input = document.createElement("input");
     // creates button element
     var button = document.createElement("button");
+    button.setAttribute("class", "btn");
     // adds text to label element
     label.textContent = "Score = " + score + " Enter initials: ";
     // adds attributes to input element
