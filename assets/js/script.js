@@ -255,7 +255,7 @@ function setTime() {
         }
 
         // stops timer if all questions have been answered or if replay button is clicked
-        if (currentQuestion == 1 || currentQuestion == 6) {
+        if (currentQuestion == 1 || currentQuestion == 7) {
             clearInterval(timerInterval);
             // clear timer from screen
             timer.textContent = "";
@@ -264,8 +264,29 @@ function setTime() {
     }, 1000);
 }
 
+// remove button listener function
+function removeButtonListener() {
+    // button assignment
+    var button1 = document.querySelector("#btn1");
+    var button2 = document.querySelector("#btn2");
+    var button3 = document.querySelector("#btn3");
+    var button4 = document.querySelector("#btn4");
+    // creates clone of buttons
+    var button1Clone = button1.cloneNode(true);
+    var button2Clone = button2.cloneNode(true);
+    var button3Clone = button3.cloneNode(true);
+    var button4Clone = button4.cloneNode(true);
+    // replaces buttons with clones
+    button1.parentNode.replaceChild(button1Clone, button1);
+    button2.parentNode.replaceChild(button2Clone, button2);
+    button3.parentNode.replaceChild(button3Clone, button3);
+    button4.parentNode.replaceChild(button4Clone, button4);
+}
+
 // wrongAnswer function
 function wrongAnswer() {
+    // calls function to remove button listeners
+    removeButtonListener();
     // print "Wrong!" below the buttons
     var wrong = document.querySelector("#answer");
     wrong.textContent = "Wrong!";
@@ -291,12 +312,15 @@ function wrongAnswer() {
         case 6:
             // calls function to add initials and score to local storage
             addScore();
+            currentQuestion = 7;
             break;
     }
 }
 
 // correctAnswer function
 function correctAnswer() {
+    // calls function to remove button listeners
+    removeButtonListener();
     // print "Correct!" below the buttons
     var correct = document.querySelector("#answer");
     correct.textContent = "Correct!";
@@ -322,6 +346,7 @@ function correctAnswer() {
         case 6:
             // calls function to add initials and score to local storage
             addScore();
+            currentQuestion = 7;
             break;
     }
 }
@@ -330,6 +355,7 @@ function correctAnswer() {
 function secondQuestion() {
     // sets current question to 3
     currentQuestion = 3;
+    console.log(currentQuestion);
 
     // changes text of quiz-header div to second question
     var quizHeader = document.querySelector(".quiz-header");
@@ -355,6 +381,7 @@ function secondQuestion() {
 function thirdQuestion() {
     // sets current question to 4
     currentQuestion = 4;
+    console.log(currentQuestion);
 
     // changes text of quiz-header div to third question
     var quizHeader = document.querySelector(".quiz-header");
@@ -380,6 +407,7 @@ function thirdQuestion() {
 function fourthQuestion() {
     // sets current question to 5
     currentQuestion = 5;
+    console.log(currentQuestion);
 
     // changes text of quiz-header div to fourth question
     var quizHeader = document.querySelector(".quiz-header");
@@ -403,7 +431,6 @@ function fourthQuestion() {
 
 // fifthQuestion function
 function fifthQuestion() {
-    // sets current question to 6
     currentQuestion = 6;
 
     // changes text of quiz-header div to fifth question
@@ -430,6 +457,7 @@ function fifthQuestion() {
 function startQuiz() {
     // sets current question to 2
     currentQuestion = 2;
+    console.log(currentQuestion);
 
     // ensures timer is set to 75 seconds
     secondsLeft = 75;
