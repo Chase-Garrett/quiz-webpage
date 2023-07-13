@@ -101,6 +101,13 @@ function saveScore() {
 
 // firstQuestion function
 function firstQuestion() {
+    // removes replay button
+    var replay = document.querySelector("#clear");
+    replay.style.display = "none";
+
+    // sets currentQuestion to 1
+    currentQuestion = 1;
+
     // removes text from quiz-body div
     var quizBody = document.querySelector(".quiz-body");
     quizBody.textContent = "";
@@ -139,10 +146,6 @@ function firstQuestion() {
     });
     // appends button element to quiz-body div
     quizBody.appendChild(button);
-
-    // removes replay button
-    var replay = document.querySelector("#clear");
-    replay.style.display = "none";
 }
 
 
@@ -233,10 +236,13 @@ function setTime() {
             addScore();
         }
 
-        // stops timer if all questions have been answered
-        if (currentQuestion == 6) {
+        // stops timer if all questions have been answered or if replay button is clicked
+        if (currentQuestion == 1 || currentQuestion == 6) {
             clearInterval(timerInterval);
+            // clear timer from screen
+            timer.textContent = "";
         }
+
     }, 1000);
 }
 
@@ -304,6 +310,9 @@ function correctAnswer() {
 
 // secondQuestion function
 function secondQuestion() {
+    // sets current question to 3
+    currentQuestion = 3;
+
     // changes text of quiz-header div to second question
     var quizHeader = document.querySelector(".quiz-header");
     quizHeader.textContent = "The condition in an if / else statement is enclosed within ____.";
@@ -326,6 +335,9 @@ function secondQuestion() {
 
 // thirdQuestion function
 function thirdQuestion() {
+    // sets current question to 4
+    currentQuestion = 4;
+
     // changes text of quiz-header div to third question
     var quizHeader = document.querySelector(".quiz-header");
     quizHeader.textContent = "Arrays in JavaScript can be used to store ____.";
@@ -348,6 +360,9 @@ function thirdQuestion() {
 
 // fourthQuestion function
 function fourthQuestion() {
+    // sets current question to 5
+    currentQuestion = 5;
+
     // changes text of quiz-header div to fourth question
     var quizHeader = document.querySelector(".quiz-header");
     quizHeader.textContent = "String values must be enclosed within ____ when being assigned to variables.";
@@ -370,6 +385,9 @@ function fourthQuestion() {
 
 // fifthQuestion function
 function fifthQuestion() {
+    // sets current question to 6
+    currentQuestion = 6;
+
     // changes text of quiz-header div to fifth question
     var quizHeader = document.querySelector(".quiz-header");
     quizHeader.textContent = "A very useful tool used during development and debugging for printing content to the debugger is:";
@@ -392,6 +410,9 @@ function fifthQuestion() {
 
 // startQuiz function
 function startQuiz() {
+    // sets current question to 2
+    currentQuestion = 2;
+
     // ensures timer is set to 75 seconds
     secondsLeft = 75;
     // displays timer
