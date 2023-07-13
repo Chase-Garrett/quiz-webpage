@@ -2,6 +2,10 @@
 var generateBtn = document.querySelector("#start");
 var timer = document.querySelector("#time");
 
+var secondsLeft = 75;
+var currentQuestion = 1;
+var score = 0;
+
 // create button to clear score and restart quiz
 var clearButton = document.createElement("button");
 clearButton.setAttribute("class", "btn");
@@ -29,9 +33,6 @@ var quizBody = document.querySelector(".quiz-body");
  // appends p element to quiz-body div
  quizBody.appendChild(p);
 
-var secondsLeft = 75;
-var currentQuestion = 1;
-var score = 0;
 
 // displays high scores
 function displayScores() {
@@ -435,9 +436,8 @@ function startQuiz() {
     // displays timer
     setTime();
 
-    // changes text of quiz-header div to first question
-    var quizHeader = document.querySelector(".quiz-header");
-    quizHeader.textContent = "Commonly used data types DO NOT include:";
+    // removes start button
+
 
     // removes text of quiz-body div
     var quizBody = document.querySelector(".quiz-body");
@@ -465,14 +465,23 @@ function startQuiz() {
     button2.addEventListener("click", wrongAnswer);
     button3.addEventListener("click", correctAnswer);
     button4.addEventListener("click", wrongAnswer);
-
-    // hides start button
-    generateBtn.style.display = "none";
 }
 
 
 // When start button is clicked, quiz begins
-generateBtn.addEventListener("click", startQuiz);
+   // creates button element
+   var generateBtn = document.createElement("button");
+   generateBtn.setAttribute("class", "btn");
+   // adds text to button element
+   generateBtn.textContent = "Start Quiz";
+   // adds event listener to button element
+   generateBtn.addEventListener("click", function (event) {
+       event.preventDefault();
+       // calls function to start quiz
+       startQuiz();
+   });
+   // appends button element to quiz-body div
+   quizBody.appendChild(generateBtn);
 
 // make header-left clickable to view high scores
 var headerLeft = document.querySelector(".header-left");

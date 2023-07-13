@@ -66,13 +66,6 @@ li {
   top: 0;
   right: 0;
   padding: 10px;
-  color: hsl(206, 17%, 28%);
-}
-
-/* set formatting for timer */
-.timer {
-  font-size: 18px;
-  font-weight: bold;
   color: purple;
 }
 
