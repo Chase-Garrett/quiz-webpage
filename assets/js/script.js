@@ -41,7 +41,6 @@ function startQuiz() {
 
     // removes start button
     var quizFooter = document.querySelector(".quiz-footer");
-    var buttonStyle = window.getComputedStyle(generateBtn);
     quizFooter.removeChild(generateBtn);
     // add text to hidden buttons and display them
     var button1 = document.querySelector("#btn1");
