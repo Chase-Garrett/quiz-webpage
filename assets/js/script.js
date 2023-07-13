@@ -36,6 +36,7 @@ var quizBody = document.querySelector(".quiz-body");
 
 // displays high scores
 function displayScores() {
+    currentQuestion = 7;
     // hides buttons
     var button1 = document.querySelector("#btn1");
     button1.style.display = "none";
