@@ -4,6 +4,7 @@ var timer = document.querySelector("#time");
 
 var secondsLeft = 75;
 var currentQuestion = 1;
+var score = 0;
 
 // Timer function
 function setTime() {
