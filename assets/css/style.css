@@ -49,11 +49,6 @@ header {
   color: hsl(206, 17%, 28%);
 }
 
-/* make timer hidden until quize starts */
-#time {
-  display: none;
-}
-
 /* set formatting for quiz section */
 .quiz {
   background-color: hsl(0, 0%, 100%);
