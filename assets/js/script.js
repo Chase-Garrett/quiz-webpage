@@ -36,7 +36,6 @@ var quizBody = document.querySelector(".quiz-body");
 
 // displays high scores
 function displayScores() {
-    currentQuestion = 7;
     // hides buttons
     var button1 = document.querySelector("#btn1");
     button1.style.display = "none";
@@ -514,4 +513,8 @@ function startQuiz() {
 
 // make header-left clickable to view high scores
 var headerLeft = document.querySelector(".header-left");
-headerLeft.addEventListener("click", displayScores);
+headerLeft.addEventListener("click", function() {
+    displayScores();
+    // stop timer
+    currentQuestion = 7;
+});
