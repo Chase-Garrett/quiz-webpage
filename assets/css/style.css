@@ -40,13 +40,33 @@ header {
   color: hsl(206, 17%, 28%);
 }
 
+/* set formatting for ul list */
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: hsl(0, 0%, 100%);
+}
+
+/* set formatting for li list */
+li {
+  float: center;
+}
+
+/* change cursor to pointer when hovering header-left and change text color to purple */
+.header-left:hover {
+  cursor: pointer;
+  color: purple;
+}
+
 /* set timer to the upper right of the page */
 .header-right {
   position: absolute;
   top: 0;
   right: 0;
   padding: 10px;
-  color: hsl(206, 17%, 28%);
+  color: purple;
 }
 
 /* set formatting for quiz section */
@@ -90,4 +110,22 @@ header {
 button[disabled] {
   cursor: default;
   background: #c0c7cf;
+}
+
+@media (max-width: 690px) {
+  .btn {
+    font-size: 1rem;
+    margin: 16px 0px 0px 0px;
+    padding: 10px 15px;
+  }
+
+  #password {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 500px) {
+  .btn {
+    font-size: 0.8rem;
+  }
 }
