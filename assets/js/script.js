@@ -18,31 +18,49 @@ function setTime() {
     }, 1000);
 }
 
+// wrongAnswer function
+function wrongAnswer() {
+    // print "Wrong!" below the buttons
+    var wrong = querySelector("#answer");
+    wrong.textContent = "Wrong!";
+    // subtract 10 seconds from timer
+    secondsLeft -= 10;
+}
+
 // startQuiz function
 function startQuiz() {
     // displays timer
     setTime();
     // removes text from quiz-body div
-    var quizBody = document.getElementsByClassName("quiz-body")[0];
+    var quizBody = document.querySelector(".quiz-body");
     quizBody.textContent = "";
 
     // changes text of quiz-header div to first question
-    var quizHeader = document.getElementsByClassName("quiz-header")[0];
+    var quizHeader = document.querySelector(".quiz-header");
     quizHeader.textContent = "Commonly used data types DO NOT include:";
 
-    // creates 4 buttons in the same style as the start button and appends them to the quiz-footer div
-    // each button has a unique id
-    // each button has an answer choice as its text content
-    // each button has an event listener that calls the checkAnswer function
     // removes start button
-    var quizFooter = document.getElementsByClassName("quiz-footer")[0];
-    var button1 = document.createElement("button");
-    button1.setAttribute("class", "btn btn-primary btn-lg btn-block");
-    button1.setAttribute("id", "button1");
+    var quizFooter = document.querySelector(".quiz-footer");
+    var buttonStyle = window.getComputedStyle(generateBtn);
+    quizFooter.removeChild(generateBtn);
+    // add text to hidden buttons and display them
+    var button1 = document.querySelector("#btn1");
     button1.textContent = "1. strings";
-    button1.addEventListener("click", checkAnswer);
-    quizFooter.appendChild(button1);
-
+    button1.style.display = "inline-block";
+    var button2 = document.querySelector("#btn2");
+    button2.textContent = "2. booleans";
+    button2.style.display = "inline-block";
+    var button3 = document.querySelector("#btn3");
+    button3.textContent = "3. alerts";
+    button3.style.display = "inline-block";
+    var button4 = document.querySelector("#btn4");
+    button4.textContent = "4. numbers";
+    button4.style.display = "inline-block";
+    //add event listeners to buttons
+    button1.addEventListener("click", wrongAnswer);
+    button2.addEventListener("click", wrongAnswer);
+    button3.addEventListener("click", correctAnswer);
+    button4.addEventListener("click", wrongAnswer);
 }
 
 
