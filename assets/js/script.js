@@ -3,6 +3,7 @@ var generateBtn = document.querySelector("#start");
 var timer = document.querySelector("#time");
 
 var secondsLeft = 75;
+var currentQuestion = 1;
 
 // Timer function
 function setTime() {
@@ -21,10 +22,19 @@ function setTime() {
 // wrongAnswer function
 function wrongAnswer() {
     // print "Wrong!" below the buttons
-    var wrong = querySelector("#answer");
+    var wrong = document.querySelector("#answer");
     wrong.textContent = "Wrong!";
     // subtract 10 seconds from timer
     secondsLeft -= 10;
+    currentQuestion++;
+}
+
+// correctAnswer function
+function correctAnswer() {
+    // print "Correct!" below the buttons
+    var correct = document.querySelector("#answer");
+    correct.textContent = "Correct!";
+    currentQuestion++;
 }
 
 // startQuiz function
