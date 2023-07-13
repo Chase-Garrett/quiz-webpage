@@ -27,6 +27,7 @@ function wrongAnswer() {
     wrong.textContent = "Wrong!";
     // subtract 10 seconds from timer
     secondsLeft -= 10;
+    // move to next question
     currentQuestion++;
 }
 
@@ -35,6 +36,9 @@ function correctAnswer() {
     // print "Correct!" below the buttons
     var correct = document.querySelector("#answer");
     correct.textContent = "Correct!";
+    // add 10 points to score
+    score += 10;
+    // move to next question
     currentQuestion++;
 }
 
