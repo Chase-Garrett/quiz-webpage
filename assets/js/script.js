@@ -6,6 +6,64 @@ var secondsLeft = 75;
 var currentQuestion = 1;
 var score = 0;
 
+// addScore function
+function addScore() {
+    // hides buttons
+    var button1 = document.querySelector("#btn1");
+    button1.style.display = "none";
+    var button2 = document.querySelector("#btn2");
+    button2.style.display = "none";
+    var button3 = document.querySelector("#btn3");
+    button3.style.display = "none";
+    var button4 = document.querySelector("#btn4");
+    button4.style.display = "none";
+
+    
+    // removes text from quiz-body div
+    var quizBody = document.querySelector(".quiz-body");
+    quizBody.textContent = "";
+    // removes text from answer div
+    var answer = document.querySelector("#answer");
+    answer.textContent = "";
+    // removes text from quiz-header div
+    var quizHeader = document.querySelector(".quiz-header");
+    quizHeader.textContent = "";
+    // removes text from timer div
+    var timer = document.querySelector("#time");
+    timer.textContent = "";
+    // removes text from start button
+    var start = document.querySelector("#start");
+    start.textContent = "";
+    // creates form element
+    var form = document.createElement("form");
+    // creates label element
+    var label = document.createElement("label");
+    // creates input element
+    var input = document.createElement("input");
+    // creates button element
+    var button = document.createElement("button");
+    // adds text to label element
+    label.textContent = "Enter initials: ";
+    // adds attributes to input element
+    input.setAttribute("type", "text");
+    input.setAttribute("id", "initials");
+    // adds text to button element
+    button.textContent = "Submit";
+    // adds event listener to button element
+    button.addEventListener("click", function (event) {
+        event.preventDefault();
+        // calls function to save initials and score to local storage
+        saveScore();
+    });
+    // appends label element to form element
+    form.appendChild(label);
+    // appends input element to form element
+    form.appendChild(input);
+    // appends button element to form element
+    form.appendChild(button);
+    // appends form element to quiz-body div
+    quizBody.appendChild(form);
+}
 
 // Timer function
 function setTime() {
