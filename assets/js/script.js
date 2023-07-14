@@ -355,7 +355,6 @@ function correctAnswer() {
 function secondQuestion() {
     // sets current question to 3
     currentQuestion = 3;
-    console.log(currentQuestion);
 
     // changes text of quiz-header div to second question
     var quizHeader = document.querySelector(".quiz-header");
@@ -381,7 +380,6 @@ function secondQuestion() {
 function thirdQuestion() {
     // sets current question to 4
     currentQuestion = 4;
-    console.log(currentQuestion);
 
     // changes text of quiz-header div to third question
     var quizHeader = document.querySelector(".quiz-header");
@@ -407,7 +405,6 @@ function thirdQuestion() {
 function fourthQuestion() {
     // sets current question to 5
     currentQuestion = 5;
-    console.log(currentQuestion);
 
     // changes text of quiz-header div to fourth question
     var quizHeader = document.querySelector(".quiz-header");
@@ -457,7 +454,6 @@ function fifthQuestion() {
 function startQuiz() {
     // sets current question to 2
     currentQuestion = 2;
-    console.log(currentQuestion);
 
     // ensures timer is set to 75 seconds
     secondsLeft = 75;
